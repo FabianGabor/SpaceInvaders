@@ -23,5 +23,23 @@ public class PlayerShip extends SpaceShip {
 	public void setMovementState(int state) {
 		shipMoving = state;
 	}
+
+	@Override
+	public void update(long fps) {
+		if (shipMoving == LEFT) {
+			if (this.getX() > 0)
+				x = x - shipSpeed / fps;
+		}
+
+		if (shipMoving == RIGHT) {
+			if (this.getX() < SpaceInvadersView.getScreenX() - this.getLength())
+				x = x + shipSpeed / fps;
+		}
+
+		rect.top = y;
+		rect.bottom = y + height;
+		rect.left = x;
+		rect.right = x + length;
+	}
 }
 
