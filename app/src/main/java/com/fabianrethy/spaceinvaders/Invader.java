@@ -40,4 +40,34 @@ public class Invader extends SpaceShip {
 	public boolean getVisibility() {
 		return isVisible;
 	}
+
+	public void dropDownAndReverse() {
+		if (shipMoving == LEFT) {
+			shipMoving = RIGHT;
+		} else {
+			shipMoving = LEFT;
+		}
+
+		y = y + height;
+
+		shipSpeed = shipSpeed * 1.18f;
+	}
+
+	public boolean takeAim(float playerShipX, float playerShipLength) {
+		int randomNumber;
+
+		// near the player
+		if ((playerShipX + playerShipLength > x && playerShipX + playerShipLength < x + length) ||
+				(playerShipX > x && playerShipX < x + length)) {
+
+			randomNumber = generator.nextInt(1000);
+			if (randomNumber == 0) {
+				return true;
+			}
+		}
+
+		// firing randomly
+		randomNumber = generator.nextInt(5000);
+		return randomNumber == 0;
+	}
 }
